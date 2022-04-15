@@ -2,7 +2,7 @@ import sqlalchemy as sa
 from fastapi import FastAPI
 
 import src.api.protocols
-from src.api import users, protocols
+from src.api import users, protocols, stats
 from src.database import DatabaseSettings, create_database_url
 from src.user.service import UserService
 
@@ -15,6 +15,7 @@ def get_application() -> FastAPI:
     )
 
     application.include_router(users.router)
+    application.include_router(stats.router)
 
     db_settings = DatabaseSettings()
     engine = sa.create_engine(
@@ -23,6 +24,7 @@ def get_application() -> FastAPI:
     )
     user_service = UserService(engine)
     application.dependency_overrides[protocols.UserServiceProtocol] = lambda: user_service
+    application.dependency_overrides[protocols.StatsServiceProtocol] = lambda: stats_service
     return application
 
 
