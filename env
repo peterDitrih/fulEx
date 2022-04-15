@@ -1,0 +1,7 @@
+DB_HOST=fulex_post
+DB_PORT=5432
+DB_USERNAME=user
+DB_PASSWORD=password
+DB_DATABASE=fulex
+POSTGRES_USER=user
+POSTGRES_PASSWORD=password

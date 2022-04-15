@@ -67,3 +67,9 @@
 ## Запуск
 
 Используйте `uvicorn src.api:app --host 0.0.0.0 --port 5000` для запуска API. Подробнее в документации [FastAPI](https://fastapi.tiangolo.com/deployment/manually/) или [Uvicorn](https://www.uvicorn.org/).
+
+# Комментарий
+
+собрать контейнер базы `cd migrations && docker build --network host -t fulex_post .`
+собрать контейнер api `docker build --network host -t fulex_api .` (в корне проекта)
+запустить `docker-compose up -d` (в корне проекта)

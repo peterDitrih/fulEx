@@ -1,0 +1,15 @@
+services:
+  postgres:
+    container_name: 'fulex_post'
+    image: 'fulex_post'
+    env_file:
+      - env
+  api:
+    depends_on:
+      - "postgres"
+    container_name: 'fulex_api'
+    image: 'fulex_api'
+    env_file:
+      - env
+    ports:
+      - '127.0.0.1:5000:5000'
