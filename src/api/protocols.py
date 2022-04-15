@@ -5,6 +5,9 @@ from src.stats.models import StatsResponseV1, StatsAddRequestV1
 
 
 class UserServiceProtocol:
+    def delete_all_users(self) -> None:
+        raise NotImplementedError
+
     def get_all_users(self) -> List[UserResponseV1]:
         raise NotImplementedError
 

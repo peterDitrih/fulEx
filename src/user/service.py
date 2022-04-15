@@ -28,12 +28,14 @@ class UserService:
     def get_user_by_id(self, id: int) -> UserResponseV1:
         query = select(tables.users).where(tables.users.c.id == id)
         with self._engine.connect() as connection:
-            user_data = connection.execute(query)
-        user = UserResponseV1(
-            id=user_data['id'],
-            login=user_data['login'],
-            name=user_data['name']
-        )
+            user_data = connection.execute(query).fetchone()
+        user = None
+        if user_data:
+            user = UserResponseV1(
+                id=user_data['id'],
+                login=user_data['login'],
+                name=user_data['name']
+            )
         return user
 
     def add_user(self, user: UserAddRequestV1) -> None:
@@ -48,6 +50,12 @@ class UserService:
 
     def delete_user_by_id(self, id: int) -> None:
         query = delete(tables.users).where(tables.users.c.id == id)
+        with self._engine.connect() as connection:
+            connection.execute(query)
+            connection.commit()
+
+    def delete_all_users(self) -> None:
+        query = delete(tables.users)
         with self._engine.connect() as connection:
             connection.execute(query)
             connection.commit()
