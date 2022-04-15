@@ -52,7 +52,7 @@ async def scan_users():
                     )
                     stats_service.add_stat(repo_obj)
 
-        await asyncio.sleep(84600)
+        await asyncio.sleep(86400)
 
 try:
     loop = asyncio.get_running_loop()
